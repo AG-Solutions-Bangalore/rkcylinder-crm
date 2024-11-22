@@ -147,8 +147,16 @@ const CylView = () => {
         filter: true,
         sort: false,
         customBodyRender: (value, tableMeta) => {
-          const cylinder_sub_manufacturer_month = tableMeta.rowData[3];
-          const cylinder_sub_manufacturer_year = tableMeta.rowData[4];
+          let cylinder_sub_manufacturer_month;
+      let cylinder_sub_manufacturer_year;
+
+      if (branchId === 1) {
+        cylinder_sub_manufacturer_month = tableMeta.rowData[3];
+        cylinder_sub_manufacturer_year = tableMeta.rowData[4];
+      } else {
+        cylinder_sub_manufacturer_month = tableMeta.rowData[2];
+        cylinder_sub_manufacturer_year = tableMeta.rowData[3];
+      }
           return `${cylinder_sub_manufacturer_month}/${cylinder_sub_manufacturer_year}`;
         },
       },
