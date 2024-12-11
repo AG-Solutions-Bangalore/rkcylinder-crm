@@ -10,7 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { IoIosQrScanner } from "react-icons/io";
 import { Dialog, DialogBody, DialogFooter } from "@material-tailwind/react";
 import ScannerModel from "../../components/ScannerModel";
-import SearchableSelect from "../../components/SearchableSelect";
+import Select from "react-select";
 
 const month = [
   {
@@ -145,6 +145,23 @@ const AddCylinderSub = () => {
   const onInputChange = (e) => {
     setCylinder({ ...cylinder, [e.target.name]: e.target.value });
   };
+
+  //
+
+  const manufacturerOptions = manufacturer.map((c_manufacturer) => ({
+    value: c_manufacturer.id,
+    label: c_manufacturer.manufacturer_name,
+  }));
+
+  const handleManufacturerChange = (selectedOption) => {
+    setCylinder({
+      ...cylinder,
+      cylinder_sub_manufacturer_id: selectedOption ? selectedOption.value : "",
+      cylinder_sub_manufacturer_id_new: "",
+    });
+  };
+
+  //
 
   const onSubmitNext = async (e) => {
     e.preventDefault();
@@ -283,7 +300,7 @@ const AddCylinderSub = () => {
           cylinder_sub_n_weight: cylinder.cylinder_sub_n_weight,
         };
       }
-
+     
       const token = localStorage.getItem("token");
       const response = await axios.post(
         `${BASE_URL}/api/web-create-cylinder-sub`,
@@ -386,8 +403,8 @@ const AddCylinderSub = () => {
                       label="R K Serial No"
                       inputProps={{
                         maxLength: 6,
-                        minLength: 5,
-                        pattern: "[0-9]{5,6}",
+                        minLength: 4,
+                        pattern: "[0-9]{4,6}",
                       }}
                       onKeyDown={handleKeyDown}
                       name="cylinder_sub_barcode"
@@ -419,14 +436,26 @@ const AddCylinderSub = () => {
                 {cylinder.cylinder_sub_manufacturer_id != "1" &&
                   cylinder.cylinder_sub_manufacturer_id != "513" && (
                     <>
-                      <SearchableSelect
-                        manufacturer={manufacturer}
-                        value={cylinder.cylinder_sub_manufacturer_id}
-                        onChange={onInputChange}
+                      <Select
+                        options={manufacturerOptions}
+                        value={manufacturerOptions.find(
+                          (option) =>
+                            option.value ===
+                            cylinder.cylinder_sub_manufacturer_id
+                        )}
+                        onChange={handleManufacturerChange}
+                        placeholder="Select Manufacturer"
+                        isSearchable={true}
                         name="cylinder_sub_manufacturer_id"
-                        label="Manufacturer"
-                        required
+                        styles={{
+                          control: (base) => ({
+                            ...base,
+                            height: "56px",
+                            zIndex: 10,
+                          }),
+                        }}
                       />
+
                       {/* <TextField
                     id="select-corrpreffer"
                     required

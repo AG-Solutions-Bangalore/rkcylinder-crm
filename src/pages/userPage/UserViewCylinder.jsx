@@ -133,7 +133,7 @@ const UserViewCylinder = () => {
 
   const checkBarcode = async (value) => {
     const barcodeId = value;
-    if (barcodeId.length === 6 || barcodeId.length === 5) {
+    if (barcodeId.length === 6 || barcodeId.length === 5 || barcodeId.length === 4) {
       const token = localStorage.getItem("token");
       const response = await axios.get(
         `${BASE_URL}/api/web-fetch-cylinder-by-scan/${barcodeId}`,
@@ -153,7 +153,7 @@ const UserViewCylinder = () => {
       testRef.current.focus();
       setLatestid("");
     }else{
-      setMessage("Barcode Length must be 5 or 6");
+      setMessage("Barcode Length must be 4 to 6");
     }
     // } else if (barcodeId.length === 0) {
     //   setMessage("Please enter a valid barcode ID.");
