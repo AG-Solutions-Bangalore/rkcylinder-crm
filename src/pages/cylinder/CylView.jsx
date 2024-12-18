@@ -10,6 +10,7 @@ import axios from "axios";
 import BASE_URL from "../../base/BaseUrl";
 import MUIDataTable from "mui-datatables";
 import { toast } from "react-toastify";
+import { IoReturnDownBack } from "react-icons/io5";
 
 const CylView = () => {
   const { id } = useParams();
@@ -220,8 +221,13 @@ const CylView = () => {
   return (
     <Layout>
       <div className="p-4 sm:p-6">
-        <div className="mb-6">
-          <h3 className="text-xl sm:text-2xl font-bold">View Cylinder</h3>
+        <div className="mb-6 flex  items-center justify-between gap-4">
+       
+          <h3 className="text-xl border-b-2 border-dashed border-blue-900 sm:text-2xl font-bold">View Cylinder</h3>
+          <Link to="/cylinder">
+                <button className="w-20 h-10  border border-red-500 hover:border-blue-500 bg-blue-400 hover:bg-red-100  p-1 rounded-lg text-white hover:text-red-700" >Go Back</button>
+              </Link>
+          
         </div>
         <div className="bg-white p-4 sm:p-6 shadow rounded-md">
           <div className=" flex  flex-col items-center md:flex-row lg:flex-row xl:flex-row justify-around gap-4 mb-4">

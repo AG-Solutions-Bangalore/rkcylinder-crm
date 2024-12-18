@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import BASE_URL from "../../base/BaseUrl";
 
-import { IoIosQrScanner } from "react-icons/io";
 import { Dialog, DialogBody, DialogFooter } from "@material-tailwind/react";
 import ScannerModel from "../../components/ScannerModel";
+import { QrCodeIcon } from "lucide-react";
 
 const ViewCylinder = () => {
   const [latestid, setLatestid] = useState("");
@@ -143,7 +143,7 @@ const ViewCylinder = () => {
     // } else if (barcodeId.length === 0) {
     //   setMessage("Please enter a valid barcode ID.");
     // }
-  };
+  };  
 
   return (
     <Layout>
@@ -155,11 +155,12 @@ const ViewCylinder = () => {
               <div className="flex flex-wrap">
                 <div className="w-full md:w-1/3 mb-4 flex items-center">
                   {branchId === 1 ? (
-                    <IoIosQrScanner
+                    <QrCodeIcon
+
                       className="mdi mdi-barcode-scan mdi-48px menu-icon"
                       style={{ cursor: "pointer", marginRight: "1rem" }}
                       onClick={openmodal}
-                    ></IoIosQrScanner>
+                    ></QrCodeIcon>
                   ) : (
                     ""
                   )}

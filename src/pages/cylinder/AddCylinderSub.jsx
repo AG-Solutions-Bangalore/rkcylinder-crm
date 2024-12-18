@@ -300,7 +300,7 @@ const AddCylinderSub = () => {
           cylinder_sub_n_weight: cylinder.cylinder_sub_n_weight,
         };
       }
-     
+
       const token = localStorage.getItem("token");
       const response = await axios.post(
         `${BASE_URL}/api/web-create-cylinder-sub`,
@@ -357,7 +357,21 @@ const AddCylinderSub = () => {
       e.preventDefault();
     }
   };
-  console.log("manufu id", cylinder.cylinder_sub_manufacturer_id);
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      height: "55px",
+      minHeight: "55px",
+      fontSize: "1rem",
+      borderRadius: "0.2rem",
+      borderColor: "#2196F3",
+    }),
+    menu: (provided) => ({
+      ...provided,
+      fontSize: "1rem",
+      zIndex:10
+    }),
+  };
   return (
     <Layout>
       <Toaster
@@ -447,15 +461,32 @@ const AddCylinderSub = () => {
                         placeholder="Select Manufacturer"
                         isSearchable={true}
                         name="cylinder_sub_manufacturer_id"
-                        styles={{
-                          control: (base) => ({
-                            ...base,
-                            height: "56px",
-                            zIndex: 10,
-                          }),
-                        }}
+                        styles={customStyles}
+                        required
                       />
-
+                      {/* <div>
+                       
+                      <Select
+                          name="cylinder_sub_manufacturer_id"
+                          options={manufacturer.map((option) => ({
+                            value: option.manufacturer_name,
+                            label: option.manufacturer_name,
+                            name: "cylinder_sub_manufacturer_id",
+                          }))}
+                          onChange={(e) => onInputChange(e)}
+                          value={
+                            cylinder.cylinder_sub_manufacturer_id
+                              ? {
+                                  value: cylinder.cylinder_sub_manufacturer_id,
+                                  label: cylinder.cylinder_sub_manufacturer_id,
+                                }
+                              : null
+                          }
+                          placeholder="Select Manufacturer"
+                          styles={customStyles}
+                          isSearchable={true}
+                        />
+                      </div> */}
                       {/* <TextField
                     id="select-corrpreffer"
                     required
